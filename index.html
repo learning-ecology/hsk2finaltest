@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HSK 2 Final Exam 考试</title>
+<style>
+:root{--bg:#f3f5f8;--card:#fff;--ink:#1b2333;--mut:#5d6778;--line:#d9dee7;--acc:#27408b;--accbg:#e8edfa;--ok:#14764f;--okbg:#e2f4ec;--bad:#b3261e;--badbg:#fbe9e7}
+@media (prefers-color-scheme:dark){:root{--bg:#121722;--card:#1b2231;--ink:#e8ecf4;--mut:#9aa5b8;--line:#2f3a50;--acc:#8fa8ff;--accbg:#27324f;--ok:#5ad19a;--okbg:#17342a;--bad:#ff8a80;--badbg:#3b2220}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.zh{font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",SimSun,serif;font-weight:600;font-size:1.15em;font-style:normal}
+.py{display:block;font-size:.8em;color:var(--mut);font-style:normal;line-height:1.3}
+.t{display:inline-block;vertical-align:top}
+body.nopy .py{display:none}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:8px 12px;padding-top:max(8px,env(safe-area-inset-top));display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+header h1{font-size:1rem;margin:0;flex:1;min-width:130px}
+header .pr{font-size:.85rem;color:var(--mut)}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{border:1px solid var(--acc);background:var(--accbg);color:var(--acc);border-radius:8px;padding:6px 12px;font-weight:600}
+.btn.main{background:var(--acc);color:var(--card)}
+main{max-width:760px;margin:0 auto;padding:12px 12px max(40px,env(safe-area-inset-bottom))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.info label{font-size:.85rem;color:var(--mut);display:block}
+.info input{width:100%;font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+h2{margin:28px 0 4px;font-size:1.15rem;border-left:5px solid var(--acc);padding-left:10px}
+h3{margin:18px 0 2px;font-size:1rem}
+.intro{color:var(--mut);font-size:.9rem;margin:0 0 8px}
+.bank{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px;margin:8px 0}
+.bank div,.line{background:var(--accbg);border-radius:8px;padding:6px 10px}
+.bank b.l,.line b.l{color:var(--acc);margin-right:6px}
+.line{margin:4px 0}
+.q{padding:12px 0;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:0}
+.qh{margin-bottom:8px}
+.qh>b{margin-right:6px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.o{border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:6px 12px;text-align:left;min-height:44px}
+.o.c{min-width:44px;text-align:center;font-weight:700}
+.o .l{font-weight:700;color:var(--acc);margin-right:6px}
+.o.sel{border-color:var(--acc);background:var(--accbg)}
+.ans{min-height:50px;border:2px dashed var(--line);border-radius:10px;padding:6px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;align-items:center}
+.ans:empty::before{content:"Tap the parts in order";color:var(--mut);font-size:.85rem;padding-left:6px}
+.pool{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:6px 10px;min-height:44px}
+.ans .chip{border-color:var(--acc);background:var(--accbg)}
+.chip.used{opacity:.3}
+.passage{background:var(--bg);border-left:4px solid var(--acc);border-radius:6px;padding:8px 12px;margin:8px 0}
+.passage p{margin:6px 0}
+.fb{margin-top:8px;padding:8px 10px;border-radius:8px;font-size:.92rem}
+.q.ok .fb{background:var(--okbg);color:var(--ok)}
+.q.bad .fb{background:var(--badbg)}
+.q.bad .fb .t{color:var(--ink)}
+.q.ok .o.sel{border-color:var(--ok);background:var(--okbg)}
+.q.bad .o.sel{border-color:var(--bad);background:var(--badbg)}
+.q.bad .o.key{border-color:var(--ok)}
+.fix .o,.fix .chip{pointer-events:none}
+#res{display:none;text-align:center;border:2px solid var(--acc)}
+#res .big{font-size:2.4rem;font-weight:800;color:var(--acc);line-height:1.1}
+#res table{margin:10px auto 0;border-collapse:collapse;width:100%;max-width:420px}
+#res td{padding:4px 8px;border-top:1px solid var(--line);text-align:left}
+#res td:last-child{text-align:right;font-weight:700}
+.sub{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.rt{display:none}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+</style>
+</head>
+<body>
+<header>
+  <h1>HSK 2 考试 · Final Exam</h1>
+  <span class="pr" id="prog">0 / 50</span>
+  <button class="btn" id="pyb" aria-pressed="true">Hide pinyin</button>
+</header>
+<main>
+  <div class="card info">
+    <div><label>Name 姓名 <span class="py" style="display:inline">xìngmíng</span></label><input id="nm" autocomplete="name"></div>
+    <div><label>Class 班 <span class="py" style="display:inline">bān</span></label><input id="cl"></div>
+  </div>
+  <div class="card">
+    <b>Instructions</b>
+    <ul style="margin:6px 0 0;padding-left:20px;font-size:.92rem">
+      <li>50 questions, 2 points each (100 total). Suggested time: 60 minutes.</li>
+      <li>Choose ONE best answer. In Section IV, tap the parts in the right order; tap a part again to remove it.</li>
+      <li>Use the button at the top to hide or show pinyin. You can change your answers until you submit.</li>
+      <li>After you submit, you will see your score, the correct answers and which ones you missed.</li>
+    </ul>
+  </div>
+  <div id="exam"></div>
+  <div class="sub" id="subrow"><button class="btn main" id="sub">Submit answers</button></div>
+  <div class="card" id="res"></div>
+  <div class="sub rt" id="rtrow"><button class="btn" id="again">Try again</button></div>
+</main>
+<script>
+const L='ABCDEFG';
+const T=s=>{const[z,p]=s.split('|');return `<span class="t"><b class="zh">${z}</b><i class="py">${p||''}</i></span>`};
+const M=(n,stem,opts,key)=>({n,type:'mc',stem,opts,key});
+const O=(n,parts,key)=>({n,type:'ord',parts,key});
+
+const SEC=[
+{t:'Section I · Vocabulary Matching 词汇配对',parts:[
+ {h:'Part A (1–5): Opposites',i:'Match each word with the word that has the OPPOSITE meaning. Choose A–G. Two letters are not used.',
+  bank:['热|rè','慢|màn','近|jìn','卖|mài','右边|yòubian','高|gāo','累|lèi'],
+  qs:[M(1,'远|yuǎn',7,'C'),M(2,'快|kuài',7,'B'),M(3,'买|mǎi',7,'D'),M(4,'左边|zuǒbian',7,'E'),M(5,'冷|lěng',7,'A')]},
+ {h:'Part B (6–10): Words and descriptions',i:'Read each description and choose the word it describes. Two letters are not used.',
+  bank:['公共汽车|gōnggòng qìchē','机场|jīchǎng','咖啡|kāfēi','手表|shǒubiǎo','西瓜|xīguā','雪|xuě','医院|yīyuàn'],
+  qs:[M(6,'我生病了，要去这儿看医生。|Wǒ shēngbìng le, yào qù zhèr kàn yīshēng.',7,'G'),
+      M(7,'它在手上，可以看时间。|Tā zài shǒushang, kěyǐ kàn shíjiān.',7,'D'),
+      M(8,'我们在这儿坐飞机，去外国。|Wǒmen zài zhèr zuò fēijī, qù wàiguó.',7,'B'),
+      M(9,'它是水果，很大，里面是红色的。|Tā shì shuǐguǒ, hěn dà, lǐmian shì hóngsè de.',7,'E'),
+      M(10,'很冷的时候会下它，它是白色的。|Hěn lěng de shíhou huì xià tā, tā shì báisè de.',7,'F')]}
+]},
+{t:'Section II · Fill-in-the-Blanks 填空',parts:[
+ {i:'Choose the best word to complete each sentence.',qs:[
+  M(11,'昨天我和朋友去商店买____两件衣服。|Zuótiān wǒ hé péngyou qù shāngdiàn mǎi ____ liǎng jiàn yīfu.',['吗|ma','了|le','呢|ne'],'B'),
+  M(12,'她说汉语说____很好。|Tā shuō Hànyǔ shuō ____ hěn hǎo.',['得|de','的|de','地|de'],'A'),
+  M(13,'请你慢慢____说，我听不懂。|Qǐng nǐ mànmàn ____ shuō, wǒ tīngbudǒng.',['的|de','得|de','地|de'],'C'),
+  M(14,'我家____火车站很近。|Wǒ jiā ____ huǒchēzhàn hěn jìn.',['离|lí','从|cóng','在|zài'],'A'),
+  M(15,'____这儿往左走，就是我的学校。|____ zhèr wǎng zuǒ zǒu, jiù shì wǒ de xuéxiào.',['离|lí','给|gěi','从|cóng'],'C'),
+  M(16,'你想喝茶____喝咖啡？|Nǐ xiǎng hē chá ____ hē kāfēi?',['和|hé','还是|háishì','就|jiù'],'B'),
+  M(17,'因为我生病了，____我不能去上班。|Yīnwèi wǒ shēngbìng le, ____ wǒ bù néng qù shàngbān.',['但是|dànshì','因为|yīnwèi','所以|suǒyǐ'],'C'),
+  M(18,'虽然这件衣服很漂亮，____太贵了。|Suīrán zhè jiàn yīfu hěn piàoliang, ____ tài guì le.',['但是|dànshì','因为|yīnwèi','所以|suǒyǐ'],'A'),
+  M(19,'这____裤子很便宜。|Zhè ____ kùzi hěn piányi.',['件|jiàn','条|tiáo','本|běn'],'B'),
+  M(20,'今天____昨天冷。|Jīntiān ____ zuótiān lěng.',['跟|gēn','和|hé','比|bǐ'],'C')]}
+]},
+{t:'Section III · Conversation Ordering 对话排序',parts:[
+ {h:'Conversation 1 (21–24): At a clothes shop',i:'The 1st line is given. Choose the line that belongs in each position.',
+  given:'你好，这件衣服多少钱？|Nǐ hǎo, zhè jiàn yīfu duōshao qián?',
+  bank:['太贵了！可以便宜一点儿吗？|Tài guì le! Kěyǐ piányi yìdiǎnr ma?','好，我买了。谢谢！|Hǎo, wǒ mǎi le. Xièxie!','三百八十块。|Sānbǎi bāshí kuài.','好吧，三百块，你要吗？|Hǎo ba, sānbǎi kuài, nǐ yào ma?'],
+  qs:[M(21,'2nd line|',4,'C'),M(22,'3rd line|',4,'A'),M(23,'4th line|',4,'D'),M(24,'5th line|',4,'B')]},
+ {h:'Conversation 2 (25–27): A phone call',i:'The 1st line is given.',
+  given:'喂，小王，你明天有时间吗？|Wèi, Xiǎo Wáng, nǐ míngtiān yǒu shíjiān ma?',
+  bank:['我们一起去看电影，你想去吗？|Wǒmen yìqǐ qù kàn diànyǐng, nǐ xiǎng qù ma?','好啊！我很想去。|Hǎo a! Wǒ hěn xiǎng qù.','有，怎么了？|Yǒu, zěnme le?'],
+  qs:[M(25,'2nd line|',3,'C'),M(26,'3rd line|',3,'A'),M(27,'4th line|',3,'B')]},
+ {h:'Conversation 3 (28–30): Not feeling well',i:'The 1st line is given.',
+  given:'你怎么了？|Nǐ zěnme le?',
+  bank:['还没有，我现在就去。|Hái méiyǒu, wǒ xiànzài jiù qù.','我头很疼，身体也不舒服。|Wǒ tóu hěn téng, shēntǐ yě bù shūfu.','你去医院看医生了吗？|Nǐ qù yīyuàn kàn yīshēng le ma?'],
+  qs:[M(28,'2nd line|',3,'B'),M(29,'3rd line|',3,'C'),M(30,'4th line|',3,'A')]}
+]},
+{t:'Section IV · Sentence Reordering 排列句子',parts:[
+ {i:'Tap the parts in the correct order to make a good sentence. Tap a part in your answer to remove it.',qs:[
+  O(31,['电视呢|diànshì ne','妈妈|māma','看|kàn','正在|zhèngzài'],'BDCA'),
+  O(32,['打电话|dǎ diànhuà','要|yào','给朋友|gěi péngyou','我现在|wǒ xiànzài'],'DBCA'),
+  O(33,['一起去买东西|yìqǐ qù mǎi dōngxi','跟朋友|gēn péngyou','我们明天|wǒmen míngtiān','要|yào'],'CDBA'),
+  O(34,['快要|kuàiyào','我们的|wǒmen de','开始了|kāishǐ le','考试|kǎoshì'],'BDAC'),
+  O(35,['吃过|chīguo','北京烤鸭|Běijīng Kǎoyā','没有|méiyǒu','我|wǒ'],'DCAB'),
+  O(36,['就|jiù','在那儿|zài nàr','请往右走，|qǐng wǎng yòu zǒu,','医院|yīyuàn'],'CDAB'),
+  O(37,['看电视|kàn diànshì','坐着|zuòzhe','我弟弟|wǒ dìdi','呢|ne'],'CBAD'),
+  O(38,['踢足球|tī zúqiú','都|dōu','我和朋友|wǒ hé péngyou','喜欢|xǐhuan'],'CBDA'),
+  O(39,['他的名字|tā de míngzi','告诉我|gàosu wǒ','你|nǐ','吗|ma','能|néng'],'CEBAD'),
+  O(40,['三岁|sān suì','比我|bǐ wǒ','大|dà','他|tā'],'DBCA')]}
+]},
+{t:'Section V · Short Reading 阅读',parts:[
+ {h:'Passage 1 (41–43)',i:'Read the note, then answer.',
+  pass:['小美：|Xiǎoměi:','我今天上午去医院看爷爷了，下午在家。|Wǒ jīntiān shàngwǔ qù yīyuàn kàn yéye le, xiàwǔ zài jiā.','你回家的时候，别忘了买牛奶和鸡蛋。|Nǐ huí jiā de shíhou, bié wàng le mǎi niúnǎi hé jīdàn.','我们晚上吃鱼。你爸爸晚上六点回家。|Wǒmen wǎnshang chī yú. Nǐ bàba wǎnshang liù diǎn huí jiā.','妈妈|Māma'],
+  qs:[M(41,'妈妈今天上午去了哪儿？|Māma jīntiān shàngwǔ qù le nǎr?',['学校|xuéxiào','医院|yīyuàn','商店|shāngdiàn'],'B'),
+      M(42,'小美回家的时候要买什么？|Xiǎoměi huí jiā de shíhou yào mǎi shénme?',['牛奶和鸡蛋|niúnǎi hé jīdàn','鱼和肉|yú hé ròu','米饭和水果|mǐfàn hé shuǐguǒ'],'A'),
+      M(43,'谁晚上六点回家？|Shéi wǎnshang liù diǎn huí jiā?',['妈妈|māma','爷爷|yéye','爸爸|bàba'],'C')]},
+ {h:'Passage 2 (44–47)',i:'Read the passage, then answer.',
+  pass:['今天是星期六，天气很好。|Jīntiān shì xīngqīliù, tiānqì hěn hǎo.','我和朋友小王一起去踢足球。|Wǒ hé péngyou Xiǎo Wáng yìqǐ qù tī zúqiú.','小王踢得很好，我踢得不太好。|Xiǎo Wáng tī de hěn hǎo, wǒ tī de bú tài hǎo.','我们踢了两个小时，很累。|Wǒmen tī le liǎng ge xiǎoshí, hěn lèi.','踢完球，我们去饭馆吃了米饭和羊肉，很好吃。|Tī wán qiú, wǒmen qù fànguǎn chī le mǐfàn hé yángròu, hěn hǎochī.','回家的时候，爸爸给我打电话，他说他买了西瓜。|Huí jiā de shíhou, bàba gěi wǒ dǎ diànhuà, tā shuō tā mǎi le xīguā.'],
+  qs:[M(44,'今天是星期几？|Jīntiān shì xīngqī jǐ?',['星期五|xīngqīwǔ','星期六|xīngqīliù','星期一|xīngqīyī'],'B'),
+      M(45,'谁踢得很好？|Shéi tī de hěn hǎo?',['小王|Xiǎo Wáng','我|wǒ','爸爸|bàba'],'A'),
+      M(46,'他们踢了多长时间？|Tāmen tī le duō cháng shíjiān?',['一个小时|yí ge xiǎoshí','三个小时|sān ge xiǎoshí','两个小时|liǎng ge xiǎoshí'],'C'),
+      M(47,'他们在饭馆吃了什么？|Tāmen zài fànguǎn chī le shénme?',['米饭和鱼|mǐfàn hé yú','米饭和羊肉|mǐfàn hé yángròu','面条和羊肉|miàntiáo hé yángròu'],'B')]},
+ {h:'Passage 3 (48–50)',i:'Read the notice, then answer.',
+  pass:['我们的商店|Wǒmen de shāngdiàn','星期一到星期五：早上九点到晚上八点|Xīngqīyī dào xīngqīwǔ: zǎoshang jiǔ diǎn dào wǎnshang bā diǎn','星期六和星期日：早上十点到晚上十点|Xīngqīliù hé xīngqīrì: zǎoshang shí diǎn dào wǎnshang shí diǎn','这个星期，我们的衣服很便宜！|Zhè ge xīngqī, wǒmen de yīfu hěn piányi!','红色的衣服，一件一百五十块；黑色的衣服，一件两百块。|Hóngsè de yīfu, yí jiàn yìbǎi wǔshí kuài; hēisè de yīfu, yí jiàn liǎngbǎi kuài.','来我们的商店买衣服吧！|Lái wǒmen de shāngdiàn mǎi yīfu ba!'],
+  qs:[M(48,'星期二，商店早上几点开门？|Xīngqī’èr, shāngdiàn zǎoshang jǐ diǎn kāimén?',['九点|jiǔ diǎn','十点|shí diǎn','八点|bā diǎn'],'A'),
+      M(49,'星期日，商店开到晚上几点？|Xīngqīrì, shāngdiàn kāi dào wǎnshang jǐ diǎn?',['八点|bā diǎn','九点|jiǔ diǎn','十点|shí diǎn'],'C'),
+      M(50,'红色的衣服一件多少钱？|Hóngsè de yīfu yí jiàn duōshao qián?',['一百块|yìbǎi kuài','一百五十块|yìbǎi wǔshí kuài','两百块|liǎngbǎi kuài'],'B')]}
+]}
+];
+
+const S={},ALL=[];let done=false;
+const $=id=>document.getElementById(id);
+
+function qHTML(q){
+  let h=`<div class="q" id="q${q.n}"><div class="qh"><b>${q.n}.</b>${q.stem?T(q.stem):''}</div>`;
+  if(q.type==='mc'){
+    h+='<div class="opts">';
+    const n=typeof q.opts==='number'?q.opts:q.opts.length;
+    for(let i=0;i<n;i++)h+=`<button class="o${typeof q.opts==='number'?' c':''}" data-q="${q.n}" data-i="${i}">${typeof q.opts==='number'?L[i]:`<span class="l">${L[i]}</span>${T(q.opts[i])}`}</button>`;
+    h+='</div>';
+  }else{
+    h+=`<div class="ans" id="a${q.n}"></div><div class="pool" id="p${q.n}">`;
+    q.parts.forEach((p,i)=>h+=`<button class="chip" data-q="${q.n}" data-i="${i}">${T(p)}</button>`);
+    h+='</div>';
+  }
+  return h+'<div class="fb" hidden></div></div>';
+}
+
+function build(){
+  let h='';
+  SEC.forEach(s=>{
+    h+=`<h2>${s.t}</h2>`;
+    s.parts.forEach(p=>{
+      h+='<div class="card">';
+      if(p.h)h+=`<h3 style="margin-top:0">${p.h}</h3>`;
+      if(p.i)h+=`<p class="intro">${p.i}</p>`;
+      if(p.given)h+=`<div class="line"><b class="l">1st</b>${T(p.given)}</div>`;
+      if(p.bank)h+=`<div class="${p.given?'':'bank'}">`+p.bank.map((b,i)=>`<${p.given?'div class="line"':'div'}><b class="l">${L[i]}</b>${T(b)}</div>`).join('')+'</div>';
+      if(p.pass)h+='<div class="passage">'+p.pass.map(x=>`<p>${T(x)}</p>`).join('')+'</div>';
+      p.qs.forEach(q=>{q.part=p;q.sec=s;ALL.push(q);h+=qHTML(q)});
+      h+='</div>';
+    });
+  });
+  $('exam').innerHTML=h;
+}
+
+function optText(q,i){return typeof q.opts==='number'?L[i]:L[i]+'. '+T(q.opts[i])}
+function keyIdx(q){return L.indexOf(q.key)}
+function ordText(q,idx){return idx.map(i=>q.parts[i].split('|')[0]).join('')}
+function ordPy(q,idx){return idx.map(i=>q.parts[i].split('|')[1]).join(' ')}
+
+function paint(q){
+  const el=$('q'+q.n);
+  if(q.type==='mc'){
+    el.querySelectorAll('.o').forEach(b=>b.classList.toggle('sel',+b.dataset.i===S[q.n]));
+  }else{
+    const a=S[q.n]||[];
+    $('a'+q.n).innerHTML=a.map(i=>`<button class="chip" data-q="${q.n}" data-i="${i}" data-r="1">${T(q.parts[i])}</button>`).join('');
+    $('p'+q.n).querySelectorAll('.chip').forEach(b=>b.classList.toggle('used',a.includes(+b.dataset.i)));
+  }
+  let c=0;ALL.forEach(x=>{if(isDone(x))c++});
+  $('prog').textContent=c+' / 50';
+}
+function isDone(q){return q.type==='mc'?S[q.n]!==undefined:(S[q.n]||[]).length===q.parts.length}
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-q]');if(!b||done)return;
+  const q=ALL.find(x=>x.n==b.dataset.q),i=+b.dataset.i;
+  if(q.type==='mc')S[q.n]=i;
+  else{
+    const a=S[q.n]=S[q.n]||[];
+    const k=a.indexOf(i);
+    if(k>=0)a.splice(k,1);else a.push(i);
+  }
+  paint(q);
+});
+
+function grade(){
+  const sc={};let tot=0;
+  ALL.forEach(q=>{
+    const ok=q.type==='mc'?S[q.n]===keyIdx(q):(S[q.n]||[]).map(i=>L[i]).join('')===q.key;
+    const el=$('q'+q.n),fb=el.querySelector('.fb');
+    el.classList.add(ok?'ok':'bad');
+    if(ok){tot+=2;sc[q.sec.t]=(sc[q.sec.t]||0)+2}else sc[q.sec.t]=sc[q.sec.t]||0;
+    fb.hidden=false;
+    let ans;
+    if(q.type==='mc'){
+      el.querySelectorAll('.o')[keyIdx(q)].classList.add('key');
+      ans=optText(q,keyIdx(q));
+      if(q.stem&&q.stem.includes('____')&&typeof q.opts!=='number'){
+        const [z,p]=q.stem.split('|'),[oz,op]=q.opts[keyIdx(q)].split('|');
+        ans+=`<br>${T(z.replace('____',oz)+'|'+p.replace('____',op))}`;
+      }
+    }else{
+      const k=[...q.key].map(c=>L.indexOf(c));
+      ans=`${q.key.split('').join(' – ')}<br>${T(ordText(q,k)+'|'+ordPy(q,k))}`;
+    }
+    fb.innerHTML=(ok?'✓ Correct (+2)':'✗ Not quite (0). Correct answer: ')+(ok?'':ans);
+  });
+  return{tot,sc};
+}
+
+$('sub').onclick=()=>{
+  const miss=ALL.filter(q=>!isDone(q)).length;
+  if(miss&&!confirm(miss+' question(s) are not finished. Submit anyway?'))return;
+  done=true;document.body.classList.add('fix');
+  const{tot,sc}=grade();
+  $('res').style.display='block';
+  const nm=$('nm').value.trim(),cl=$('cl').value.trim();
+  $('res').innerHTML=`${nm||cl?`<div>${nm} ${cl?'· '+cl:''}</div>`:''}<div class="big">${tot} / 100</div>
+   <table>${SEC.map(s=>`<tr><td>${s.t.split(' · ')[0]} ${s.t.split(' · ')[1].split(' ').slice(0,-1).join(' ')}</td><td>${sc[s.t]} / 20</td></tr>`).join('')}</table>
+   <p class="intro" style="margin-top:10px">Scroll down to review every question. Correct answers are shown under each one you missed.</p>`;
+  $('subrow').style.display='none';$('rtrow').style.display='flex';
+  $('res').scrollIntoView({behavior:'smooth'});
+};
+$('again').onclick=()=>{
+  if(!confirm('Clear all answers and start again?'))return;
+  location.reload();
+};
+$('pyb').onclick=()=>{
+  const off=document.body.classList.toggle('nopy');
+  $('pyb').textContent=off?'Show pinyin':'Hide pinyin';
+  $('pyb').setAttribute('aria-pressed',String(!off));
+};
+build();
+</script>
+</body>
+</html>
